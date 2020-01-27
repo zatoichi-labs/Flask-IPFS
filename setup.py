@@ -21,6 +21,11 @@ setup(
         "Flask",
         "ipfshttpclient",
     ],
+    extras_require={
+        "dev": [
+            "bumpversion",
+        ],
+    },
     classifiers=[
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
