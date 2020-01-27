@@ -23,4 +23,4 @@ class IPFS:
         return { 'ipfs': current_app.extensions['ipfs'] }
 
     def __getattr__(self, name):
-        return current_app.extensions['ipfs']
+        return getattr(current_app.extensions['ipfs'], name)
