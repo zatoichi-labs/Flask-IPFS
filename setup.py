@@ -25,6 +25,7 @@ setup(
     extras_require={
         "dev": [
             "bumpversion",
+            "ipython",
         ],
     },
     classifiers=[
