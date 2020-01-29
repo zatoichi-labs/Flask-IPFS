@@ -34,10 +34,12 @@ class IPFS:
             self.init_app(app)
 
     def init_app(self, app):
-        cnx_multiaddr = ipfshttpclient.DEFAULT_ADDR
-        # TODO Use app.config.IPFS_GATEWAY_URL and app.config.IPFS_GATEWAY_PORT
-        #      https://github.com/ipfs/go-ipfs/blob/master/docs/config.md#addresses
-        client = ipfshttpclient.connect(cnx_multiaddr)
+        addr = construct_multiaddr(
+                url=app.config.get('IPFS_GATEWAY_URL', "http://localhost"),
+                port=app.config.get('IPFS_GATEWAY_PORT', 5001),
+            )
+        client = ipfshttpclient.connect(addr)
+
         if not hasattr(app, 'extensions'):
             app.extensions = {}
         app.extensions['ipfs'] = client
