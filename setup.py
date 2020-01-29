@@ -20,6 +20,7 @@ setup(
     install_requires=[
         "Flask",
         "ipfshttpclient",
+        "multiaddr",
     ],
     extras_require={
         "dev": [

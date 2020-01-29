@@ -1,6 +1,31 @@
+import ipaddress
+from multiaddr import Multiaddr
+
 import ipfshttpclient
 
 from flask import current_app
+
+
+def construct_multiaddr(
+    url: str="http://localhost",
+    port: int=5001,
+) -> Multiaddr:
+    http_protocol, host = url.split('://')
+
+    if http_protocol not in ('http', 'https'):
+        raise ValueError(f"Invalid protocol: {http_protocol}")
+    if not isinstance(host, str):
+        ValueError(f"Invalid url: {url}")
+
+    try:
+        # method returns either IPv4Address or IPv6Address (or raises ValueError)
+        addr = ipaddress.ip_address(host)
+        ip_protocol = 'ipv4' if isinstance(addr, ipaddress.IPv4Address) else 'ipv6'
+    except ValueError:
+        ip_protocol = 'dns'
+
+    addr = Multiaddr(f"/{ip_protocol}/{host}/tcp/{port}/{http_protocol}")
+    return addr
 
 
 class IPFS:
