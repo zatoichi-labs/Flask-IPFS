@@ -20,7 +20,7 @@ def construct_multiaddr(
     try:
         # method returns either IPv4Address or IPv6Address (or raises ValueError)
         addr = ipaddress.ip_address(host)
-        ip_protocol = 'ipv4' if isinstance(addr, ipaddress.IPv4Address) else 'ipv6'
+        ip_protocol = 'ip4' if isinstance(addr, ipaddress.IPv4Address) else 'ip6'
     except ValueError:
         ip_protocol = 'dns'
 
