@@ -21,6 +21,7 @@ setup(
         "Flask",
         "ipfshttpclient",
         "multiaddr",
+        "py-cid",
     ],
     extras_require={
         "dev": [
