@@ -17,11 +17,11 @@ app.config.update(
 )
 ipfs = IPFS(app)
 
-
 @app.route('/')
-@app.route('/version')
-def version():
-    return f'IPFS Version: {ipfs.version()["Version"]}'
+@app.route('/ls_pins')
+def ls_pins():
+    response = ipfs.ls_pins()
+    return f'{response}'
 
 @app.route('/add')
 def add():
@@ -41,11 +41,6 @@ def add_json():
 @app.route('/get_json/<cid>')
 def get_json(cid):
     response = ipfs.get_json(cid)
-    return f'{response}'
-
-@app.route('/ls_pins')
-def ls_pins():
-    response = ipfs.ls_pins()
     return f'{response}'
 
 @app.route('/add_pin/<cid>')
