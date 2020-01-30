@@ -14,6 +14,11 @@ app.config.update(
     INTERPLANETARY_FISSION_URL=os.environ.get('INTERPLANETARY_FISSION_URL'),
     INTERPLANETARY_FISSION_USERNAME=os.environ.get('INTERPLANETARY_FISSION_USERNAME'),
     INTERPLANETARY_FISSION_PASSWORD=os.environ.get('INTERPLANETARY_FISSION_PASSWORD'),
+    # Infura integration
+    # https://infura.io/docs/ipfs/get/block_get
+    INFURA_IPFS_URL=os.environ.get('INFURA_IPFS_URL'),
+    INFURA_PROJECT_ID=os.environ.get('INFURA_PROJECT_ID'),
+    INFURA_PROJECT_SECRET=os.environ.get('INFURA_PROJECT_SECRET'),
 )
 ipfs = IPFS(app)
 
