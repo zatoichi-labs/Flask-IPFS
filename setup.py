@@ -5,7 +5,7 @@ from setuptools import setup
 setup(
     name="Flask-IPFS",
     # NOTE Version managed by bumpversion
-    version="0.1.0-beta.0",
+    version="0.1.0-beta.1",
     url="https://github.com/zatoichi-labs/Flask-IPFS",
     license="MIT",
     author="Zatoichi Labs",
