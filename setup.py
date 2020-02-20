@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
-from setuptools import setup
+from setuptools import (
+    find_packages,
+    setup,
+)
 
 setup(
     name="Flask-IPFS",
@@ -13,7 +16,7 @@ setup(
     description="IPFS Plugin for Flask",
     setup_requires=['setuptools-markdown'],
     long_description_markdown_filename='README.md',
-    py_modules=["flask_ipfs"],
+    packages=find_packages(),
     zip_safe=False,
     include_package_data=True,
     platforms="any",
