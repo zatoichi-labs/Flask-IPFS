@@ -3,6 +3,7 @@ from flask import current_app
 from .fission import InterplanetaryFission
 from .http import IpfsHttpClient
 from .infura import Infura
+from .test import TestClient
 
 class IPFS:
     def __init__(self, app=None):
@@ -10,7 +11,9 @@ class IPFS:
             self.init_app(app)
 
     def init_app(self, app):
-        if app.config.get('INTERPLANETARY_FISSION_URL', None):
+        if app.config.get('IPFS_TESTER', None):
+            client = TestClient()
+        elif app.config.get('INTERPLANETARY_FISSION_URL', None):
             client = InterplanetaryFission(
                     url=app.config.get('INTERPLANETARY_FISSION_URL'),
                     username=app.config.get('INTERPLANETARY_FISSION_USERNAME'),

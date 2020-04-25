@@ -28,7 +28,7 @@ class IpfsHttpClient(BaseAPI):
         return self._client.add_str(raw_str)
 
     def get(self, cid):
-        return self._client.object.get(cid)["Data"]
+        return self._client.cat(cid).decode('utf-8')
 
     def add_json(self, obj):
         return self._client.add_json(obj)  # returns CID
