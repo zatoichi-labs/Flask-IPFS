@@ -30,6 +30,7 @@ setup(
         "dev": [
             "bumpversion",
             "ipython",
+            "pytest",
             "twine",
         ],
     },
