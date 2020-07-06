@@ -24,12 +24,6 @@ class Infura(BaseAPI):
             raise ValueError(f"Error processing request: {response.text}")
         return response.text
 
-    def add_json(self, obj):
-        return self.add(json.dumps(obj))
-
-    def get_json(self, cid):
-        return json.loads(self.get(cid))
-
     def ls_pins(self):
         return self.pins
 
@@ -42,7 +36,3 @@ class Infura(BaseAPI):
     def rm_pin(self, cid):
         # Cannot remove pins from IPFS
         self.pins.remove(cid)
-
-    def update_pin(self, old_cid, new_cid):
-        self.add_pin(new_cid)
-        self.rm_pin(old_cid)

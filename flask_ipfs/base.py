@@ -2,6 +2,7 @@ from abc import (
     ABC,
     abstractmethod,
 )
+import json
 from typing import (
     Dict,
     List,
@@ -24,13 +25,11 @@ class BaseAPI(ABC):
     def get(self, cid: CID) -> str:
         pass
 
-    @abstractmethod
     def add_json(self, obj: Dict) -> CID:
         return self.add(json.dumps(obj))
 
-    @abstractmethod
     def get_json(self, cid: CID) -> Dict:
-        pass
+        return json.loads(self.get(cid))
 
     @abstractmethod
     def ls_pins(self) -> List[CID]:
@@ -44,6 +43,6 @@ class BaseAPI(ABC):
     def rm_pin(self, cid: CID):
         pass
 
-    @abstractmethod
     def update_pin(self, old_cid: CID, new_cid: CID):
-        pass
+        self.add_pin(new_cid)
+        self.rm_pin(old_cid)

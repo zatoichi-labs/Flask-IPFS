@@ -20,12 +20,6 @@ class InterplanetaryFission(BaseAPI):
             raise ValueError(f"Error processing request: {response.text}")
         return response.text
 
-    def add_json(self, obj):
-        return self.add(json.dumps(obj))
-
-    def get_json(self, cid):
-        return json.loads(self.get(cid))
-
     def ls_pins(self):
         response = requests.get(self._url(f'/ipfs/cids'), auth=self._auth)
         if response.status_code != 200:
@@ -41,7 +35,3 @@ class InterplanetaryFission(BaseAPI):
         response = requests.delete(self._url(f'/ipfs/{cid}'), auth=self._auth)
         if response.status_code != 202:
             raise ValueError(f"Error processing request: {response.text}")
-
-    def update_pin(self, old_cid, new_cid):
-        self.rm_pin(old_cid)
-        self.add_pin(new_cid)
