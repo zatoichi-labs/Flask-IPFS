@@ -9,8 +9,7 @@ class Infura(BaseAPI):
         self._auth = (project_id, project_secret)
         self.pins = []  # Keep track of the pins we know about (temporary until Infura adds this)
 
-    def url(self, endpoint):
-        print(f"{self._url + endpoint}")
+    def url(self, endpoint='/'):
         return self._url + endpoint
 
     def add(self, raw_str):
