@@ -26,7 +26,7 @@ class BaseAPI(ABC):
         pass
 
     def add_json(self, obj: Dict) -> CID:
-        return self.add(json.dumps(obj))
+        return self.add(json.dumps(obj, sort_keys=True, separators=(",", ":")))
 
     def get_json(self, cid: CID) -> Dict:
         return json.loads(self.get(cid))
