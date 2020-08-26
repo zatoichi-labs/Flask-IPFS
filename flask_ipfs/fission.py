@@ -8,11 +8,23 @@ class InterplanetaryFission(BaseAPI):
         self._url = lambda endpoint: url + endpoint
         self._auth = (username, password)
 
+    def add_bytes(self, raw_bytes):
+        response = requests.post(self._url(f'/ipfs'), data=raw_bytes, auth=self._auth)
+        if response.status_code != 200:
+            raise ValueError(f"Error processing request: {response.text}")
+        return response.text  # returns CID
+
     def add(self, raw_str):
         response = requests.post(self._url(f'/ipfs'), data=raw_str, auth=self._auth)
         if response.status_code != 200:
             raise ValueError(f"Error processing request: {response.text}")
         return response.text  # returns CID
+
+    def get_bytes(self, cid):
+        response = requests.get(self._url(f'/ipfs/{cid}'), auth=self._auth)
+        if response.status_code != 200:
+            raise ValueError(f"Error processing request: {response.text}")
+        return response.content
 
     def get(self, cid):
         response = requests.get(self._url(f'/ipfs/{cid}'), auth=self._auth)

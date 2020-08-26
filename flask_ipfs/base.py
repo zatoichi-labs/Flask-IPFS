@@ -18,7 +18,15 @@ CID = Union[str, CIDv0, CIDv1]
 
 class BaseAPI(ABC):
     @abstractmethod
+    def add_bytes(self, raw_bytes: bytes) -> CID:
+        pass
+
+    @abstractmethod
     def add(self, raw_str: str) -> CID:
+        pass
+
+    @abstractmethod
+    def get_bytes(self, cid: CID) -> bytes:
         pass
 
     @abstractmethod

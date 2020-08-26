@@ -24,11 +24,17 @@ class IpfsHttpClient(BaseAPI):
         addr = Multiaddr(f"/{ip_protocol}/{host}/tcp/{port}/{http_protocol}")
         self._client = ipfshttpclient.connect(addr)
 
+    def add_bytes(self, raw_bytes):
+        return self._client.add(raw_bytes)
+
     def add(self, raw_str):
         return self._client.add_str(raw_str)
 
+    def get_bytes(self, cid):
+        return self._client.cat(cid)
+
     def get(self, cid):
-        return self._client.cat(cid).decode('utf-8')
+        return self.get_bytes(cid).decode('utf-8')
 
     def add_json(self, obj):
         return self._client.add_json(obj)  # returns CID

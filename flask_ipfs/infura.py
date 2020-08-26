@@ -12,11 +12,23 @@ class Infura(BaseAPI):
     def url(self, endpoint='/'):
         return self._url + endpoint
 
+    def add_bytes(self, raw_bytes):
+        response = requests.post(self.url('/add?pin=true'), files={"fake": raw_bytes.encode("utf-8")})
+        if response.status_code != 200:
+            raise ValueError(f"Error processing request: {response.text}")
+        return response.json()['Hash']  # returns CID
+
     def add(self, raw_str):
         response = requests.post(self.url('/add?pin=true'), files={"fake": (None, raw_str)})
         if response.status_code != 200:
             raise ValueError(f"Error processing request: {response.text}")
         return response.json()['Hash']  # returns CID
+
+    def get_bytes(self, cid):
+        response = requests.get(self.url(f'/cat?arg={cid}'))
+        if response.status_code != 200:
+            raise ValueError(f"Error processing request: {response.text}")
+        return response.content
 
     def get(self, cid):
         response = requests.get(self.url(f'/cat?arg={cid}'))

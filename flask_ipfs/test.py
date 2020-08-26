@@ -35,11 +35,19 @@ class TestClient(BaseAPI):
         h = hasher.digest()
         return to_b58_string(mh_encode(h, 'sha2-256'))
 
+    def add_bytes(self, raw_bytes: bytes) -> CID:
+        cid = self._get_multihash(raw_bytes)
+        self._db[cid] = raw_bytes
+        return cid
+
     def add(self, raw_str: str) -> CID:
         data = raw_str.encode('utf-8')
         cid = self._get_multihash(data)
         self._db[cid] = data
         return cid
+
+    def get_bytes(self, cid: CID) -> bytes:
+        return self._db[cid]
 
     def get(self, cid: CID) -> str:
         return self._db[cid].decode('utf-8')
