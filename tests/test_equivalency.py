@@ -9,6 +9,13 @@ def test_add(http_client, test_client):
     assert http_client.get(http_cid) == test_client.get(test_cid)
     #assert http_cid == test_cid  # TODO Does not produce the same hash
 
+def test_add(http_client, test_client):
+    data = b"Something"
+    http_cid = http_client.add_bytes(data)
+    test_cid = test_client.add_bytes(data)
+    assert http_client.get_bytes(http_cid) == test_client.get_bytes(test_cid)
+    #assert http_cid == test_cid  # TODO Does not produce the same hash
+
 
 def test_add_json(http_client, test_client):
     data = {"key": "Something"}
