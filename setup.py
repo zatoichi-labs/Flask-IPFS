@@ -14,7 +14,7 @@ setup(
     author="Zatoichi Labs",
     author_email="admin@zatoichilabs.com",
     description="IPFS Plugin for Flask",
-    setup_requires=['setuptools-markdown'],
+    setup_requires=['setuptools-markdown', 'wheel'],
     long_description_markdown_filename='README.md',
     packages=find_packages(),
     zip_safe=False,
